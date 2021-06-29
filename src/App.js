@@ -11,9 +11,14 @@ function App() {
         <h3>{people.length} birthdays today</h3>
         <List people={people} />
         <button onClick={() => {
-          console.log('Hello World');
+          if (people.length > 1) {
+            setPeople([]);
+          }
+          else {
+            setPeople(data);
+          }
         }}>
-          clear all
+          {people.length > 1 ? `clear all` : `fetch data`}
         </button>
       </section>
     </main>

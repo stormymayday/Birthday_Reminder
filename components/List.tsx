@@ -3,13 +3,20 @@ import Person from "./Person";
 
 interface ListProps {
     people: PersonType[];
+    removeItem: (id: number) => void;
 }
 
-function List({ people }: ListProps) {
+function List({ people, removeItem }: ListProps) {
     return (
         <section>
             {people.map((person) => {
-                return <Person key={person.id} {...person} />;
+                return (
+                    <Person
+                        key={person.id}
+                        person={person}
+                        removeItem={removeItem}
+                    />
+                );
             })}
         </section>
     );

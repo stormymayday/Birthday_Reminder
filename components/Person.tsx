@@ -1,19 +1,39 @@
 import { PersonType } from "@/types";
 import Image from "next/image";
 
-function Person({ name, age, image }: PersonType) {
+interface PersonProps {
+    person: PersonType;
+    removeItem: (id: number) => void; // Include removeItem as a prop
+}
+
+function Person({ person, removeItem }: PersonProps) {
     return (
         <article className="person">
             <Image
-                src={image}
-                alt={name}
+                src={person.image}
+                alt={person.name}
                 width={75}
                 height={75}
                 className="img"
             />
-            <div>
-                <h4>{name}</h4>
-                <p>{age} years</p>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                }}
+            >
+                <div>
+                    <h4>{person.name}</h4>
+                    <p>{person.age} years</p>
+                </div>
+                <button
+                    className="btn"
+                    onClick={() => {
+                        removeItem(person.id);
+                    }}
+                >
+                    delete
+                </button>
             </div>
         </article>
     );
